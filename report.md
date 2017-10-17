@@ -86,7 +86,8 @@ result <- predict(modelRf, test[, -length(names(test))])
 result
 ```
 # Figures
-## Decision Tree Visualisation 
+# # Decision Tree Visualisation 
+
 ``{r, message=FALSE}
 set.seed(12345)
 modFitDT <- rpart(classe ~ ., data = training, method="class", control = rpart.control(method = "cv", number = 10))
