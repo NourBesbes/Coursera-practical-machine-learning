@@ -96,9 +96,8 @@ set.seed(12345)
 modFitDT <- rpart(classe ~ ., data = training, method="class", control = rpart.control(method = "cv", number = 10))
 prp(modFitDT)
 ```
-<p align="center">
-  <img src="./figures/Rplot01.png" width="400"/>
-</p>
+![Alt text](./figures/Rplot01.png?raw=true)
+
 ## Correlation Matrix Visualization
 ```{r, message=FALSE}
 corrPlot <- cor(training[, -length(names(training))])
