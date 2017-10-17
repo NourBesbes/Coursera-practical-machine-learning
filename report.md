@@ -80,9 +80,9 @@ controlRf <- trainControl(method="cv", 5)
 modelRf <- train(classe ~ ., data=training, method="rf", trControl=controlRf, ntree=250)
 plot(modelRf)
 ```
-<p align="center">
-  <img src="./figures/Rplot.png" width="400"/>
-</p>
+![Alt text](./figures/Rplot.png?raw=true)
+
+
 # Predicting for Test Data Set
 Now, we apply the model to the testing data set downloaded from the data source. We remove the problem_id column first.
 ```{r, message=FALSE}
