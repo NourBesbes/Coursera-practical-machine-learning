@@ -86,14 +86,17 @@ result <- predict(modelRf, test[, -length(names(test))])
 result
 ```
 # Figures
-# # Decision Tree Visualisation 
-
-``{r, message=FALSE}
+## Decision Tree Visualisation 
+```{r, message=FALSE}
 set.seed(12345)
 modFitDT <- rpart(classe ~ ., data = training, method="class", control = rpart.control(method = "cv", number = 10))
 prp(modFitDT)
 ```
-
+## Correlation Matrix Visualization
+```{r, message=FALSE}
+corrPlot <- cor(training[, -length(names(training))])
+corrplot(corrPlot, method="color")
+```
 
 
 
