@@ -78,7 +78,11 @@ We fit a predictive model for activity recognition using Random Forest algorithm
 ```{r, message=FALSE}
 controlRf <- trainControl(method="cv", 5)
 modelRf <- train(classe ~ ., data=training, method="rf", trControl=controlRf, ntree=250)
+plot(modelRf)
 ```
+<p align="center">
+  <img src="./figures/Rplot.png" width="200"/>
+</p>
 # Predicting for Test Data Set
 Now, we apply the model to the testing data set downloaded from the data source. We remove the problem_id column first.
 ```{r, message=FALSE}
@@ -92,11 +96,17 @@ set.seed(12345)
 modFitDT <- rpart(classe ~ ., data = training, method="class", control = rpart.control(method = "cv", number = 10))
 prp(modFitDT)
 ```
+<p align="center">
+  <img src="./figures/Rplot01.png" width="200"/>
+</p>
 ## Correlation Matrix Visualization
 ```{r, message=FALSE}
 corrPlot <- cor(training[, -length(names(training))])
 corrplot(corrPlot, method="color")
 ```
+<p align="center">
+  <img src="./figures/Rplot02.png" width="200"/>
+</p>
 
 
 
