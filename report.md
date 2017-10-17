@@ -81,7 +81,7 @@ modelRf <- train(classe ~ ., data=training, method="rf", trControl=controlRf, nt
 plot(modelRf)
 ```
 <p align="center">
-  <img src="./figures/Rplot.png" width="200"/>
+  <img src="./figures/Rplot.png" width="400"/>
 </p>
 # Predicting for Test Data Set
 Now, we apply the model to the testing data set downloaded from the data source. We remove the problem_id column first.
@@ -97,7 +97,7 @@ modFitDT <- rpart(classe ~ ., data = training, method="class", control = rpart.c
 prp(modFitDT)
 ```
 <p align="center">
-  <img src="./figures/Rplot01.png" width="200"/>
+  <img src="./figures/Rplot01.png" width="400"/>
 </p>
 ## Correlation Matrix Visualization
 ```{r, message=FALSE}
@@ -105,7 +105,7 @@ corrPlot <- cor(training[, -length(names(training))])
 corrplot(corrPlot, method="color")
 ```
 <p align="center">
-  <img src="./figures/Rplot02.png" width="200"/>
+  <img src="./figures/Rplot02.png" width="400"/>
 </p>
 
 
