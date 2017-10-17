@@ -34,7 +34,7 @@ library(corrplot)
 In order to read cv file we use the read.csv 
 ```{r, message=FALSE}
 train <- read.csv("./data/pml-training.csv")
-train <- read.csv("./data/pml-testing.csv")
+test <- read.csv("./data/pml-testing.csv")
 dim(train)
 dim(test)
 names(train)
@@ -64,4 +64,36 @@ dim(test)
 ```
 Now, the cleaned training data set contains 19622 observations and 53 variables, while the testing data set contains 20 observations and 53 variables.
 # Partitioning the Dataset
+We will split our data into a training data set (70% of the total cases) and a testing data set (30% of the total cases).
+We will use the test data set to conduct cross validation in future steps.
+```{r, message=FALSE}
+set.seed(12345)
+inTrain <- createDataPartition(train$classe, p=0.7, list=FALSE)
+training <- train[inTrain,]
+testing <- train[-inTrain,]
+dim(training); dim(testing);
+```
+# Building the Random Forest Model
+We fit a predictive model for activity recognition using Random Forest algorithm because it's robust to correlated covariates & outliers in general. We will use 5-fold cross validation when applying the algorithm.we choose to use 250 trees
+```{r, message=FALSE}
+controlRf <- trainControl(method="cv", 5)
+modelRf <- train(classe ~ ., data=training, method="rf", trControl=controlRf, ntree=250)
+```
+# Predicting for Test Data Set
+Now, we apply the model to the testing data set downloaded from the data source. We remove the problem_id column first.
+```{r, message=FALSE}
+result <- predict(modelRf, test[, -length(names(test))])
+result
+```
+# Figures
+## Decision Tree Visualisation 
+``{r, message=FALSE}
+set.seed(12345)
+modFitDT <- rpart(classe ~ ., data = training, method="class", control = rpart.control(method = "cv", number = 10))
+prp(modFitDT)
+```
+
+
+
+
 
